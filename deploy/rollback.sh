@@ -12,7 +12,9 @@ case "${1:-}" in
     *) sed -n '2,3p' "$0"; exit 1 ;;
 esac
 
-ssh "$SSH_HOST" bash -s -- "$1" "$APP_DIR" "${2:-}" "$REMOTE_ROOT" <<'REMOTE'
+# ssh recolle les arguments en une seule ligne : on les protège avec printf %q,
+# sinon un argument vide (pas de release précisée) disparaît en route.
+ssh "$SSH_HOST" "bash -s -- $(printf '%q ' "$1" "$APP_DIR" "${2:-}" "$REMOTE_ROOT")" <<'REMOTE'
 set -euo pipefail
 TARGET=$1 APP_DIR=$2 WANTED=$3 REMOTE_ROOT=$4
 cd "$APP_DIR"

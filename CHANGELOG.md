@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.2] - 2026-11-20
+
+- fix: `deploy/rollback.sh front` sans version précisée échouait (« $4: unbound variable ») car ssh perdait l'argument vide
+
 ## [1.2.1] - 2026-11-20
 
 - fix: construire le front sous Node 26 dans `deploy/deploy.sh` (foncier_front 1.3.0) et y installer Yarn 1, que l'image node:26 ne fournit plus
