@@ -64,11 +64,11 @@ if [[ "$TARGET" == "back" ]]; then
     ln -s "$APP_DIR/shared/var" "$BUILD/var"
     VERSION_FILE="$BUILD/public/version.json"
 else
-    step "Build du front (node 18 sous Docker)"
+    step "Build du front (node 26 sous Docker)"
     [[ -f "$FRONT_ENV" ]] || fail "Fichier manquant : $FRONT_ENV (voir front.preprod.env.dist)"
     cp "$FRONT_ENV" "$BUILD/.env.production.local"
     docker run --rm -v "$BUILD":/app -w /app -v foncier-yarn-cache:/usr/local/share/.cache/yarn \
-        node:18.17.1 sh -c "yarn install --frozen-lockfile --non-interactive && yarn build"
+        node:26.13.1 sh -c "npm install --global --silent yarn@1.22.22 && yarn install --frozen-lockfile --non-interactive && yarn build"
     # Seul le résultat du build est publié ; config.js est fourni par le serveur.
     mv "$BUILD/build" "$BUILD.out" && rm -rf "$BUILD" && mv "$BUILD.out" "$BUILD"
     rm -f "$BUILD/config.js"

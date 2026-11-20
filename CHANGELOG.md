@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.1] - 2026-11-20
+
+- fix: construire le front sous Node 26 dans `deploy/deploy.sh` (foncier_front 1.3.0) et y installer Yarn 1, que l'image node:26 ne fournit plus
+
 ## [1.2.0] - 2026-10-02
 
 - feat: deploy Foncier to the personal VPS preprod (`deploy/deploy.sh`, `deploy/rollback.sh`, `docker-compose.preprod.yml`)
